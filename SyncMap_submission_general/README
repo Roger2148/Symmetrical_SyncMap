@@ -1,0 +1,9 @@
+
+The code here is the one used in the article "Symmetrical SyncMap for Imbalanced General Chunking Problems"
+Please refer to the article for details on the Symmetrical SyncMap and the continual chunking problem.
+
+Please refer to the code for changing fixed/probabilistic/mixed/dynamic problem types, as well as the hyper-parameters.
+
+"np utils and future" are necessary libs used to reproduce the environment.
+if using windows, unzip and put all folders in
+envs\ENV_NAME\Lib\site-packages\
