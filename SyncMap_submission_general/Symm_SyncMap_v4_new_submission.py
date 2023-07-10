@@ -112,7 +112,7 @@ class Symm_SyncMap_v4_new_submission:
 
         sequence_size = x.shape[0]
 
-        plus = x > 0.1 #Here the thresholding process is slightly different from that used in the paper. However, the final threshold results are the same.
+        plus = x > 0.1 #Here the thresholding process is slightly different from that used in the paper. See line 155. However, the final threshold results are the same.
         xmax = np.argmax(x, axis=1)
         for i1 in range(sequence_size):
             self.visit_matrix[i1, xmax[i1]] = True
@@ -142,29 +142,12 @@ class Symm_SyncMap_v4_new_submission:
             # state memory changing:
             if i < self.state_memory * self.time_delay:
                 pre_plus = plus[i, :]
-
-                # this is to record the syncmap history
-                # maximum = self.syncmap.max()
-                # self.syncmap = self.space_size * self.syncmap / maximum
-                # self.syncmap_history[:, :, i] = self.syncmap
                 continue
             elif self.state_memory == 2:
                 vplus = plus[i, :]
                 pre_plus = np.zeros(vplus.shape, dtype=bool)
             elif i >= self.state_memory * self.time_delay:
                 vplus, pre_plus = self.state_memory_generalization(i,plus,pre_plus,past_state_num,past_state_set)
-
-                # # where there is a state transition happened, we modify and update its previous states
-                # if (i % self.time_delay)==0:
-                #     # vplus = plus[i, :]
-                #     for j in range(past_state_num-1):
-                #         past_state_set[(past_state_num-1) - (j+1), :] = plus[i - ((self.time_delay) * j + 1), :]
-                #     pre_plus = past_state_set.sum(axis=0, dtype=bool)
-                #     vplus = plus[i, :]
-                #     vplus = np.logical_or(pre_plus, plus[i, :])
-                # else:
-                #     vplus = plus[i, :]
-                #     vplus = np.logical_or(pre_plus, plus[i, :])
 
             vminus = ~ vplus
 
