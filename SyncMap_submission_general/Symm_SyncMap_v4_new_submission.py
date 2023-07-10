@@ -112,7 +112,7 @@ class Symm_SyncMap_v4_new_submission:
 
         sequence_size = x.shape[0]
 
-        plus = x > 0.1
+        plus = x > 0.1 #Here the thresholding process is slightly different from that used in the paper. However, the final threshold results are the same.
         xmax = np.argmax(x, axis=1)
         for i1 in range(sequence_size):
             self.visit_matrix[i1, xmax[i1]] = True
